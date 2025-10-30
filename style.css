@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@600&display=swap');
+
+:root {
+  --accent: #ff5c8d;
+  --bg: linear-gradient(135deg, #ffe9ef, #d4f3ff);
+  --card-front: linear-gradient(180deg, #fff, #ffe4f1);
+  --card-back: linear-gradient(180deg, #ffffff, #f5ddea);
+  --shadow: 0 15px 35px rgba(0,0,0,0.25);
+  --card-width: 370px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+/* Card Container */
+.card-container {
+  perspective: 1000px;
+}
+
+/* Card Base */
+.card {
+  width: var(--card-width);
+  height: 480px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 1s ease-in-out;
+  cursor: pointer;
+}
+
+.card.open {
+  transform: rotateY(-160deg);
+}
+
+/* Front & Back Panels */
+.panel {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  backface-visibility: hidden;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: box-shadow 0.3s ease;
+}
+
+.front {
+  background: var(--card-front);
+}
+
+.back {
+  background: var(--card-back);
+  transform: rotateY(180deg);
+  padding: 35px;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+/* Front Content */
+h1 {
+  color: #3a1d1d;
+  font-size: 26px;
+  margin-bottom: 6px;
+}
+
+.subtext {
+  font-family: 'Dancing Script', cursive;
+  color: var(--accent);
+  font-size: 20px;
+}
+
+.photo {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 6px solid var(--accent);
+  overflow: hidden;
+  margin-top: 20px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hint {
+  color: #555;
+  font-size: 13px;
+  margin-top: 12px;
+  opacity: 0.7;
+}
+
+/* Back Content */
+.back h3 {
+  font-size: 19px;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.message {
+  font-size: 18px;
+  color: #333;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+.signature {
+  font-family: 'Dancing Script', cursive;
+  color: #c22c5a;
+  font-size: 22px;
+  align-self: flex-end;
+  margin-top: 25px;
+}
+
+/* Floating shapes */
+.floating {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.floating span {
+  position: absolute;
+  bottom: 0;
+  width: 18px;
+  height: 18px;
+  background: var(--accent);
+  opacity: 0.6;
+  border-radius: 50%;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-700px) scale(0.5);
+    opacity: 0;
+  }
+}
+
+.floating span:nth-child(1) { left: 10%; animation-delay: 0s; }
+.floating span:nth-child(2) { left: 30%; animation-delay: 2s; }
+.floating span:nth-child(3) { left: 50%; animation-delay: 4s; }
+.floating span:nth-child(4) { left: 70%; animation-delay: 1s; }
+.floating span:nth-child(5) { left: 90%; animation-delay: 3s; }
+
+/* Responsive */
+@media (max-width: 420px) {
+  :root {
+    --card-width: 320px;
+  }
+  .card {
+    height: 440px;
+  }
+  h1 { font-size: 22px; }
+  .message { font-size: 15px; }
+}
